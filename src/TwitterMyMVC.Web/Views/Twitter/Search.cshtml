@@ -1,0 +1,54 @@
+﻿@model TwitterMyMVC.Web.Models.Search
+           
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+    <h2>Top 5 Tweeps</h2>
+    @if (ViewBag.topTweeters == null)
+    {
+            <div class="alert alert-info">No Relevant Tweeps Yet</div>
+    }
+    else
+    {
+        foreach (var result in ViewBag.topTweeters)
+        {
+            <div class="thumbnail">
+                <img src="@result.ProfileImageLocation" />
+                <p><span class="tweeter">@Html.ActionLink((string)result.ScreenName, "Tweeter", "Twitter", new { tweeterId = @result.TweeterId }, null)</span>
+                        @result.NumTweets tweet
+                        @if (result.NumTweets > 1) { 
+                            @:s 
+                        }
+                </p>
+            </div>
+        }
+    }
+    </div>
+    <div class="span10">
+      <!--Body content-->
+<h2>Twitter Search</h2>
+@using (Html.BeginForm()) {
+    @Html.TextBoxFor(m => m.QueryString, new { @class = "input-medium search-query" })
+    <button type="submit" class="btn">Search</button>
+}
+
+@if (ViewBag.twitterSearchResults != null)
+{
+    if (ViewBag.twitterSearchResults.Count == 0)
+    {
+         <div class="alert alert-info">No Results Found</div>
+    }
+    else
+    {
+        foreach (var result in ViewBag.twitterSearchResults)
+        {
+            <div class="thumbnail">
+                <img src="@result.Tweet.Tweeter.ProfileImageLocation" />
+                <p><span class="tweeter">@result.Tweet.Tweeter.ScreenName</span> @result.Tweet.Text</p>
+            </div>
+        }
+    }
+}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@if(Request.IsAuthenticated) {
+            <a class="btn" href="#">
+              <i class="icon-user"></i> @User.Identity.Name
+              <span class="caret"></span>
+            </a>
+
+           
+}
+else {
+    
+
+            <a class="btn" href="#">
+              <i class="icon-user"></i> Guest
+              <span class="caret"></span>
+            </a>
+
+}

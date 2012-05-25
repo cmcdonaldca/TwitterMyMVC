@@ -1,0 +1,28 @@
+﻿    <h2><img src="@ViewBag.tweeter.ProfileImageLocation" /> @ViewBag.tweeter.ScreenName</h2>
+
+    @if (ViewBag.tweeter.Tweets == null)
+    {
+            <div class="alert alert-info">No Tweets</div>
+    }
+    else
+    {
+        foreach (dynamic tweet in ViewBag.tweeter.Tweets)
+        {
+            <div class="thumbnail">
+                <p>@tweet.Text</p>
+                @if (tweet.SearchResults == null)
+                {
+                    
+                }
+                else
+                {
+                    <ul>
+                    @foreach (var searchResults in tweet.SearchResults)
+                    {            
+                        <li>@searchResults.Search.QueryString</li>
+                    }
+                    </ul>
+                }
+            </div>
+        }
+    }
